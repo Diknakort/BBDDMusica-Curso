@@ -1,0 +1,42 @@
+﻿@model BaseDatosMusica.Models.Artista
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Borrar artista</h1>
+
+<h3>¿Estas seguro de que quieres borrar este artista?</h3>
+
+<div class="fondoblanco">
+    
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreReal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NombreReal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreArtistico)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NombreArtistico)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FechaNacimiento)
+        </dd>
+       
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index"><img src="~/img/flechaatras.png" width="35px" height="35px" /></a>
+
+    </form>
+</div>

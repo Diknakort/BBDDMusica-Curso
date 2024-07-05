@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BaseDatosMusica.Models.Colaboracione>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>COLABORACIONES</h1>
+
+<p>
+    <a asp-action="Create"><img src="~/img/añadirgrupos.png" width="40px" height="40px" /></a>
+</p>
+<form asp-controller="Colaboraciones" asp-action="Index">
+    <p>
+        colaboracion: <input type="text" name="SearchString" />
+        <input type="submit" value="Filtrar" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Artistas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grupos)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artistas!.NombreArtistico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grupos!.Nombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id"><img class="iconos" src="~/img/editar-removebg-preview.png" width="40px" height="30px" /></a>|
+                <a asp-action="Details" asp-route-id="@item.Id"><img class="iconos" src="~/img/detalles-removebg-preview.png" width="30px" height="30px" /></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"><img class="iconos" src="~/img/borrar-removebg-preview.png" width="48px" height="30px" /></a>|
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

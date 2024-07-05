@@ -1,0 +1,65 @@
+﻿@model IEnumerable<BaseDatosMusica.Models.Artista>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="NombreIcono">
+    <h1>ARTISTAS</h1>
+    <p>
+        <a asp-action="Create"><img src="~/img/añadircantantes.png" width="40px" height="40px" /></a>
+    </p>
+</div>
+
+<form asp-controller="Artistas" asp-action="Index">
+    <p>
+        Artista: <input type="text" name="SearchString" />
+        <input type="submit" value="Filtrar" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Nombre Real
+               
+        </th>
+        <th>
+            Nombre Artistico
+        </th>
+        <th>
+            Fecha de Nacimiento
+        </th>
+        <th>
+            Rol Principal 
+        </th>
+          
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model){
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreReal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreArtistico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RolPrincipalNavigation!.Nombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id"><img class="iconos" src="~/img/editar-removebg-preview.png" width="40px" height="30px" /></a>|
+                <a asp-action="Details" asp-route-id="@item.Id"><img class="iconos" src="~/img/detalles-removebg-preview.png" width="30px" height="30px" /></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"><img class="iconos" src="~/img/borrar-removebg-preview.png" width="48px" height="30px" /></a>|
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/ordenmenu.js" asp-append-version="true"></script>
+

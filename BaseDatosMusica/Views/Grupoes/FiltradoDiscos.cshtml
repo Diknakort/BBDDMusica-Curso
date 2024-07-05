@@ -1,0 +1,35 @@
+﻿@* @model IEnumerable<BaseDatosMusica.ViewModels.DiscosPorGrupoViewModel>
+
+@{
+    ViewData["Title"] = "FiltradoDiscos";
+}
+
+<h1>FiltradoDiscos</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.grupo.Nombre)</th>
+            <th>Discos:</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>@Html.DisplayFor(modelItem => item.grupo.Nombre)</td>
+                <td>
+                    @foreach (var hijo in item.DiscosGrupos)
+                    {
+                        @Html.DisplayFor(modelItem=> hijo.Nombre)
+                        @Html.DisplayFor(modelItem=> hijo.Genero)
+                        <br/>
+                    }
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
+ *@

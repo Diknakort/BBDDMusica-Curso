@@ -1,0 +1,164 @@
+﻿@model List<BaseDatosMusica.ViewModels.TourWithConcertsViewModel>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .tour-concert-section {
+        padding: 40px 0;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+
+    .section-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        color: #343a40;
+        text-align: center;
+    }
+
+    .accordion {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+    }
+
+        .accordion h3 {
+            margin: 0;
+            cursor: pointer;
+            padding: 15px 20px;
+            font-size: 20px;
+            background-color: #007bff;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .accordion h3:hover {
+                background-color: #0056b3;
+            }
+
+            .accordion h3 img {
+                width: 15px;
+                height: 15px;
+                transition: transform 0.3s ease;
+            }
+
+    .accordion-content {
+        display: none;
+        padding: 20px;
+        background-color: white;
+    }
+
+        .accordion-content.show {
+            display: block;
+        }
+
+    .concert-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 10px;
+    }
+
+    .concert-item {
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+        .concert-item h3,
+        .concert-item p {
+            margin: 0;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #343a40;
+        }
+
+    .group-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+    }
+
+    .group-item {
+        background-color: #f8f9fa;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .accordion-action-icons img {
+        width: 25px;
+        margin-left: 10px;
+    }
+</style>
+
+<section class="tour-concert-section">
+    <div class="container">
+        <h2 class="section-title">Giras</h2>
+        @foreach (var tourConcert in Model)
+        {
+            <div class="accordion">
+                <h3 onclick="toggleAccordion(this)">
+                    <span>@tourConcert.Tour!.Nombre (@tourConcert.Tour.FechaInicio - @tourConcert.Tour.FechaFinal)</span>
+                    <img src="~/img/expand-icon.png" alt="Toggle Icon">
+                </h3>
+                <div class="accordion-content">
+                    <div class="accordion-action-icons">
+                        <a asp-action="Edit" asp-route-id="@tourConcert.Tour.Id"><img src="~/img/editar-removebg-preview.png" alt="Editar" /></a>
+                        <a asp-action="Details" asp-route-id="@tourConcert.Tour.Id"><img src="~/img/detalles-removebg-preview.png" alt="Detalles" /></a>
+                        <a asp-action="Delete" asp-route-id="@tourConcert.Tour.Id"><img src="~/img/borrar-removebg-preview.png" alt="Borrar" /></a>
+                    </div>
+                    <h4>Conciertos:</h4>
+                    <div class="concert-list">
+                        @foreach (var concierto in tourConcert.Concerts!)
+                        {
+                            <div class="concert-item">
+                                <h3 onclick="toggleAccordion(this)">
+                                    <span>@concierto.Ciudad (@concierto.FechaHora)</span>
+                                    <img src="~/img/expand-icon.png" alt="Toggle Icon">
+                                </h3>
+                                <div class="accordion-content">
+                                    @if (concierto.Grupos != null)
+                                    {
+                                        <p>
+                                            <strong>Grupo:</strong> @concierto.Grupos.Nombre<br />
+                                            <strong>Manager:</strong> @(concierto.Grupos.Managers?.Nombre ?? "Desconocido")<br />
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p>No hay grupos asociados.</p>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<script>
+    function toggleAccordion(headerElement) {
+        const accordionContent = headerElement.nextElementSibling;
+        const iconElement = headerElement.querySelector("img");
+
+        accordionContent.classList.toggle("show");
+
+        iconElement.style.transform = accordionContent.classList.contains("show") ? "rotate(180deg)" : "rotate(0deg)";
+    }
+</script>

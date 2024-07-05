@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BaseDatosMusica.Models.Manager>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>MANAGERS</h1>
+
+<p>
+    <a asp-action="Create"><img src="~/img/añadircantantes.png" width="40px" height="40px" /></a>
+</p>
+<form asp-controller="Managers" asp-action="Index">
+    <p>
+        Manager: <input type="text" name="SearchString" />
+        <input type="submit" value="Filtrar" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Fecha de Nacimiento
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+                @await Component.InvokeAsync("ManagerGrupos", item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id"><img class="iconos" src="~/img/editar-removebg-preview.png" width="40px" height="30px" /></a>|
+                <a asp-action="Details" asp-route-id="@item.Id"><img class="iconos" src="~/img/detalles-removebg-preview.png" width="30px" height="30px" /></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"><img class="iconos" src="~/img/borrar-removebg-preview.png" width="48px" height="30px" /></a>|
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

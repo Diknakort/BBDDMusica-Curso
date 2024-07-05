@@ -1,0 +1,49 @@
+﻿@model IEnumerable<BaseDatosMusica.Models.Genero>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>GENERO</h1>
+
+<p>
+    <a asp-action="Create"><img src="~/img/añadircanciones.png" width="40px" height="40px" /></a>
+</p>
+<form asp-controller="Generoes" asp-action="Index">
+    <p>
+        Genero: 
+        <input type="text" name="SearchString" />
+        <input type="submit" value="Filtrar" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id"><img class="iconos" src="~/img/editar-removebg-preview.png" width="40px" height="30px" /></a>|
+                <a asp-action="Details" asp-route-id="@item.Id"><img class="iconos" src="~/img/detalles-removebg-preview.png" width="30px" height="30px" /></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"><img class="iconos" src="~/img/borrar-removebg-preview.png" width="48px" height="30px" /></a>|
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/ordenmenu.js" asp-append-version="true"></script>

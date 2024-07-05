@@ -1,0 +1,30 @@
+﻿@model BaseDatosMusica.Models.Manager
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles sobre el manager</h1>
+
+<div class="fondoblanco">
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FechaNacimiento)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id"><img src="~/img/editar-removebg-preview.png" width="40px" height="30px" /></a>
+    <a asp-action="Index"><img src="~/img/flechaatras.png" width="35px" height="35px" /></a>
+</div>

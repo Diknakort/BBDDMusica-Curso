@@ -1,0 +1,45 @@
+﻿@model BaseDatosMusica.Models.Disco
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Borrar disco</h1>
+
+<h3>¿Estas seguro de que quieres borrar este disco?</h3>
+<div class="fondoblanco">
+   
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Genero)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Genero!.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Grupos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Grupos!.Id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index"><img src="~/img/flechaatras.png" width="35px" height="35px" /></a>
+    </form>
+</div>

@@ -1,0 +1,47 @@
+﻿@model BaseDatosMusica.Models.Concierto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles del concierto</h1>
+
+<div class="fondoblanco" >
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaHora)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FechaHora)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ciudad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ciudad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Giras)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Giras!.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Grupos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Grupos!.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id"><img src="~/img/editar-removebg-preview.png" width="40px" height="30px" /></a>
+    <a asp-action="Index"><img src="~/img/flechaatras.png" width="35px" height="35px" /></a>
+</div>

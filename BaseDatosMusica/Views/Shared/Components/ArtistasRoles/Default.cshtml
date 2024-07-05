@@ -1,0 +1,31 @@
+﻿@model System.Collections.Generic.IEnumerable<BaseDatosMusica.Models.Artista>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreReal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreArtistico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreReal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreArtistico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

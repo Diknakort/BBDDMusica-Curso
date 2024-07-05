@@ -1,0 +1,26 @@
+﻿@model System.Collections.Generic.IEnumerable<BaseDatosMusica.Models.Grupo>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCreaccion)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaCreaccion)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
