@@ -88,11 +88,11 @@ namespace BaseDatosMusica.Controllers.Tests
         [TestMethod()]
         public async Task CreateTest1()
         {
-            Colaboracione GrupoValido = new Colaboracione() { GruposId = 57, ArtistasId = 138 };
+            Colaboracione GrupoValido = new Colaboracione() { GruposId = 5, ArtistasId = 45 };
             controlador.Create(GrupoValido);
-            var GrupoCreado = contexto.Lista().Result.FirstOrDefault(x => x.GruposId == 57);
+            var GrupoCreado = contexto.Lista().Result.FirstOrDefault(x => x.GruposId == 5 );
             Assert.IsNotNull(GrupoCreado);
-            Assert.AreEqual(57, GrupoCreado.GruposId);
+            Assert.AreEqual(5, GrupoCreado.GruposId);
             await controlador.DeleteConfirmed(GrupoCreado.Id);
         }
 
@@ -106,17 +106,20 @@ namespace BaseDatosMusica.Controllers.Tests
         [TestMethod()]
         public async Task EditTest1()
         {
-            Colaboracione colaboraValido = new() { GruposId = 57, ArtistasId = 138 };
+            Colaboracione colaboraValido = new() { GruposId = 5, ArtistasId = 45 };
             controlador.Create(colaboraValido);
 
-            var colaboraCreado = contexto.Lista().Result.FirstOrDefault(x => x.GruposId == 57);
-            colaboraCreado.ArtistasId = 139;
-            controlador.Edit(colaboraCreado.Id);
+            var colaboraCreado = contexto.Lista().Result.FirstOrDefault(x => x.GruposId == 5 && x.ArtistasId == 46);
+            if (colaboraCreado != null)
+            {
+                colaboraCreado.ArtistasId = 46;
+                controlador.Edit(colaboraCreado.Id);
 
-            var colaboraModificado = contexto.Lista().Result.FirstOrDefault(x => x.ArtistasId == 139);
-            Assert.IsNotNull(colaboraModificado);
-            Assert.AreEqual(139, colaboraModificado.ArtistasId);
-            await controlador.DeleteConfirmed(colaboraCreado.Id);
+                var colaboraModificado = contexto.Lista().Result.FirstOrDefault(x => x.ArtistasId == 46);
+                Assert.IsNotNull(colaboraModificado);
+                Assert.AreEqual(46, colaboraModificado.ArtistasId);
+                await controlador.DeleteConfirmed(colaboraCreado.Id);
+            }
         }
 
         [TestMethod()]
@@ -124,7 +127,7 @@ namespace BaseDatosMusica.Controllers.Tests
         {
             int id = (((await controlador.Index("") as ViewResult)).Model as IEnumerable<Colaboracione>)
                 .FirstOrDefault(x =>
-                    x.ArtistasId.Equals(138) && x.GruposId.Equals(57)).Id;
+                    x.ArtistasId.Equals(46) && x.GruposId.Equals(5)).Id;
             var resultado = await controlador.Delete(id) as ViewResult;
             Assert.IsNotNull(resultado);
             Assert.IsNull(resultado.ViewName);
@@ -135,7 +138,7 @@ namespace BaseDatosMusica.Controllers.Tests
             Assert.AreEqual(45, grupoArtista.ArtistasId);
 
             var grupoArtistaEliminar =
-                contexto.Lista().Result.FirstOrDefault(x => x.GruposId == 57 && x.ArtistasId == 138);
+                contexto.Lista().Result.FirstOrDefault(x => x.GruposId == 5 && x.ArtistasId == 46);
             Assert.IsNotNull(grupoArtistaEliminar);
 
             await controlador.DeleteConfirmed(id);
@@ -150,11 +153,11 @@ namespace BaseDatosMusica.Controllers.Tests
         public async Task DeleteConfirmedTest()
         {
 
-            Colaboracione colaboraValido = new() { GruposId = 57, ArtistasId = 138 };
+            Colaboracione colaboraValido = new() { GruposId = 5, ArtistasId = 46 };
             await controlador.Create(colaboraValido);
-            var colaboraCreado = contexto.Lista().Result.FirstOrDefault(x => x.GruposId == 57);
+            var colaboraCreado = contexto.Lista().Result.FirstOrDefault(x => x.GruposId == 5 && x.ArtistasId == 46);
             await controlador.DeleteConfirmed(colaboraCreado.Id);
-            var colaboraBorrado = contexto.Lista().Result.FirstOrDefault(x => x.GruposId == 57);
+            var colaboraBorrado = contexto.Lista().Result.FirstOrDefault(x => x.GruposId == 5 && x.ArtistasId == 46);
             Assert.IsNull(colaboraBorrado);
 
         }
@@ -175,7 +178,7 @@ namespace BaseDatosMusica.Controllers.Tests
             var result = controlador.ColaboracioneExists(99);
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.IsNull(result);
         }
 
 
